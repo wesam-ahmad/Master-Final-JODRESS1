@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="(https://i.imgur.com/6wj0hh6.jpg](https://e7.pngegg.com/pngimages/199/73/png-clipart-clothing-fashion-dress-boutique-service-moda-logo-business-thumbnail.png)" alt="Project logo"></a>
+ <img width=200px height=200px src="(https://e7.pngegg.com/pngimages/199/73/png-clipart-clothing-fashion-dress-boutique-service-moda-logo-business-thumbnail.png)" alt="Project logo"></a>
 </p>
 
 <h3 align="center">JO-DRESS</h3>

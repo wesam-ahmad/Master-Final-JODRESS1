@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="[https://i.imgur.com/6wj0hh6.jpg](https://e7.pngegg.com/pngimages/199/73/png-clipart-clothing-fashion-dress-boutique-service-moda-logo-business-thumbnail.png)" alt="Project logo"></a>
+ <img width=200px height=200px src="(https://i.imgur.com/6wj0hh6.jpg](https://e7.pngegg.com/pngimages/199/73/png-clipart-clothing-fashion-dress-boutique-service-moda-logo-business-thumbnail.png)" alt="Project logo"></a>
 </p>
 
 <h3 align="center">JO-DRESS</h3>
@@ -99,7 +99,7 @@ To use the JO-Dress system, follow the steps below:
 
 
 ## ⛏️ Built Using <a name = "built_using"></a>
-- [postgreSQL](https://www.postgresql.org/download/)) - Database
+- [postgreSQ](https://www.postgresql.org/download/)) - Database
 - [Express](https://expressjs.com/) - Server Framework
 - [ReactJs](https://vuejs.org/) - Web Framework
 - [NodeJs](https://nodejs.org/en/) - Server Environment

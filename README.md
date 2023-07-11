@@ -16,7 +16,6 @@
 ## 📝 Table of Contents
 - [About](#about)
 - [Getting Started](#getting_started)
-- [Deployment](#deployment)
 - [Usage](#usage)
 - [Built Using](#built_using)
 - [TODO](../TODO.md)
@@ -33,12 +32,12 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 What things you need to install the software and how to install them.
-*. Install Node.js by downloading the installer from the official website: [node js] ( https://nodejs.org/en/download/)
+*. Install Node.js by downloading the installer from the official website: [node js]( https://nodejs.org/en/download/)
 ```
 node -v
 npm -v
 ```
-*. Download and install PostgreSQL from the official website:[postgreSQL] ( https://www.postgresql.org/download/)  
+*. Download and install PostgreSQL from the official website:[postgreSQL]( https://www.postgresql.org/download/)  
 
 Follow the installation instructions specific to your operating system.  
 

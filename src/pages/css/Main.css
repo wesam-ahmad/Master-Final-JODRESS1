@@ -20,7 +20,8 @@ body {
 .product-grid .product-image a.image{display: block; }
 .product-grid .product-image img{
     width: 100%;
-    height: auto;
+
+    min-height: 325px;
 }
 .product-grid .product-discount-label{
     color: #fff;

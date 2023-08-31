@@ -108,28 +108,24 @@ app.put("/UpdateUser", async (req, res) => {
       const user_id = getItem(token).user_id;
      
       
-        try {
-           const { current_password,new_password } = req.body;
-          //  const saltRounds = 10;
-          //  const salt = await bcrypt.genSalt(saltRounds);
-          //  const hashedPassword = await bcrypt.hash(new_password, salt);
-           // check if password is matches with current ?
-          //  const CheckPass = await pool.query(
-          //   "SELECT count(*) FROM users WHERE user_id = $1 AND user_password = $2 RETURNING *",
-          //   [user_id,hashedPassword]
-          // );
-          res.json(hashedPassword);
-           // Update the user profile in the database
-          //  const updatedUser = await pool.query(
-          //    "UPDATE users SET user_password = $1 WHERE user_id = $2 RETURNING *",
-          //    [hashedPassword, user_id]
-          //  );
-      
-          // res.json(updatedUser.rows[0]);
-        } catch (err) {
-          console.error(err.message);
-          res.status(500).send("Server Error");
-        }
+      try {
+        const { new_password } = req.body;
+        const saltRounds = 10;
+        const salt = await bcrypt.genSalt(saltRounds);
+        const hashedPassword = await bcrypt.hash(new_password, salt);
+        // Update the user profile in the database
+        const updatedUser = await pool.query(
+          "UPDATE users SET user_password = $1 WHERE user_id = $2 RETURNING *",
+          [hashedPassword, user_id]
+        );
+   
+        res.json(updatedUser.rows[0]);
+     } catch (err) {
+       console.error(err.message);
+       res.status(500).send("Server Error");
+     } 
+
+
       });
     
   app.post("/message", async (req, res) => {
@@ -192,12 +188,58 @@ app.post("/addProduct", upload.array("image", 1), (req, res) => {
 });
 
 
+
+
+app.post("/makecheckout", async (req, res) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  const userId = getItem(token).user_id;
+
+  
+  //const { id, startDate,endDate, daterange ,price} = req.body;
+
+  const { id,startDate,endDate,price,daterange,description, color ,size,image,name,user_name} = req.body;
+
+  // res.json( req.body);
+  // Insert data into the database
+  // const query =
+    // "INSERT INTO booking (product_id,from_date,to_date,user_id,status,days_count,price) VALUES ($1, $2, $3, $4, 1, $6 ) RETURNING *;";
+  const values = [
+    id,
+    startDate,
+    endDate,    
+    userId,
+    daterange,
+    price
+  ];
+
+  const Message =  await pool.query(
+    "INSERT INTO booking (product_id,from_date,to_date,user_id,status,days_count,price) VALUES ($1, $2, $3, $4,1, $5, $6  ) RETURNING *",
+    values
+  );
+  res.json(values);
+  // res.json(12);
+
+  // pool
+  //   .query(query, values)
+  //   .then((result) => {
+  //     const inserteddress = result.rows[0];
+  //     console.log("Data sent");
+  //     res.json(bookingData);
+  //   })
+  //   .catch((error) => {
+  //     console.error("Error inserting data:", error);
+  //     res.status(500).send("Error inserting data");
+  //   });
+    
+});
+
 //get the user data from database
 app.get('/get-nav-arrival', async (req, res) => {
   try {
 
 
-    const select = await pool.query('SELECT * FROM products where deleted =false and is_approved=true order by id desc limit 8');
+    const select = await pool.query('SELECT * FROM products where deleted =false and is_approved=true order by id desc limit 4');
 
     if (select.rows.length === 0) {
       return res.status(404).json({ message: 'data not found' });
@@ -275,7 +317,7 @@ app.get('/get-related/:id', async (req, res) => {
 
     const productId = parseInt(req.params.id);
     const values = [productId];
-    const select = await pool.query('SELECT products.*,users.user_name FROM products join users on products.provider_id = users.user_id where products.cat_id =$1',values);
+    const select = await pool.query('SELECT products.*,users.user_name FROM products join users on products.provider_id = users.user_id where products.cat_id =$1 and products.deleted = false',values);
 
     if (select.rows.length === 0) {
       return res.status(404).json({ message: 'data not found' });
@@ -297,7 +339,28 @@ app.get('/get-related/:id', async (req, res) => {
  
 });
 
+app.get('/get-booking-dates/:id', async (req, res) => {
+  try {
 
+    const productId = parseInt(req.params.id);
+     
+    const booking = await pool.query("SELECT generate_series(TO_DATE(from_date,'YYYY-MM-DD'), TO_DATE(to_date,'YYYY-MM-DD'), '1 day'::interval) FROM booking WHERE TO_DATE(from_date,'YYYY-MM-DD') >= CURRENT_DATE AND product_id = $1", [productId]);
+  
+    if (booking.rows.length === 0) {
+      return res.status(404).json({ message: 'booking not found' });
+    }
+
+   const bookingData = booking.rows;
+
+    res.json(bookingData);
+
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+
+ 
+});
 //get the user data from database
 app.get('/get-cat', async (req, res) => {
   try {

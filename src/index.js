@@ -17,6 +17,10 @@ import Footer from "./components/Footer/Footer";
 import { useEffect, useState } from "react";
 import AddProudect from './pages/AddProudect';
 import AboutUs from './pages/AboutUs';
+// index.js or App.js
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'react-bootstrap-daterangepicker/css/daterangepicker.css';
+
 
 
 export default function App() {

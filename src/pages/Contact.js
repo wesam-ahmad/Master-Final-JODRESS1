@@ -105,7 +105,7 @@ const Contact = () => {
                   </div>
                   <br />
                   <div className="text-center">
-                    <button type="submit" style={{backgroundColor: '#F45757'}}>Send Message</button></div>
+                    <button type="submit" style={{backgroundColor: '#f45757'}}>Send Message</button></div>
                   {/* <p className={`font-bold mt-3 text-${msg.theme}-500`} >{msg.msg}</p> */}
                   <br />
                 </div>

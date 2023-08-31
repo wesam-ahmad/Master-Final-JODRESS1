@@ -194,10 +194,10 @@ const AddProudect = () => {
   aria-label=".form-select-sm example"
 >
   <option selected="">Select Category</option>
-  <option value={1}>One</option>
-  <option value={2}>Two</option>
-  <option value={3}>Three</option>
-  <option value={4}>Four</option>
+  <option value={1}>wedding dress</option>
+  <option value={2}>Islamic dress</option>
+  <option value={3}>Evening dress</option>
+  <option value={4}>Other</option>
 </select>
                               </div>
                             </div>
@@ -228,11 +228,11 @@ const AddProudect = () => {
   onChange={(e) => setColor(e.target.value)}
 >
   <option selected="" >Select Color</option>
-  <option value="red" Style="background-color: red;box-shadow: 0 0 0px 0px red inset;">Red</option>
-  <option value="Yellow" Style="background-color: Yellow;">Yellow</option>
-  <option value="Orange" Style="background-color: Orange;">Orange</option>
-  <option value="Green" Style="background-color: Green;">Green</option>
-  <option value="Blue" Style="background-color: Blue;">Blue</option>
+  <option value="red">Red</option>
+  <option value="Black">Black</option>
+  <option value="White">White</option>
+  <option value="Purple">Purple</option>
+  <option value="Blue">Blue</option>
 
 </select>
                               </div>

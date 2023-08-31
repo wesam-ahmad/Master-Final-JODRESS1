@@ -8,19 +8,32 @@ const Home = () => {
   const [activeTab, setActiveTab] = useState("nav-Featured");
  const [FeaturedData, setFeaturedData] = useState([]);
  const [arrivalData, setarrivalData] = useState([]);
+ const [Loading1, setLoading1] = useState(true);
+ const [Loading2, setLoading2] = useState(true);
+
  const [CatData, setCat] = useState([]);
+ const loader = document.querySelector('#loader')
 
   const handleTabClick = async(tab) => {
     setActiveTab(tab);
+
     let cus = {};
     try {
+      if(tab != 'nav-Featured' && Loading2 == true) {
+        setLoading1(true);
+
+      }
     const response = await axios.get(`http://localhost:8000/get-`+tab);
 
     cus = response.data;
       if(tab == 'nav-Featured'){
+
         setFeaturedData(cus);
+        setLoading1(false);
       }else{
         setarrivalData(cus);
+        setLoading2(false);
+        setLoading1(false);
 
       }
 
@@ -108,6 +121,13 @@ const Home = () => {
                 <h1>Items you might like</h1>
               </div>
               {/* Nav tabs */}
+            {(Loading1 == true )&& (
+              <div className="row pt-5" id="loader">
+                <div className="col-4">
+                  <img src="./images/Loading.gif" height="100px" width="200px"/>
+                </div>
+              </div>
+              )}
                    <nav>
                         <div
                           className="nav nav-tabs"
@@ -195,18 +215,16 @@ const Home = () => {
         
 
         <div className="container">
-          <div className="row">
             <div className="sec-title">
               <h1>Categories</h1>
-            </div>
-          </div>
-        </div>
+           
         <br />
         <br />
         <br />
 
 <Cats data={CatData}></Cats>
-
+        </div>
+        </div>
         <br />
         <br /> 
         <br />
@@ -220,14 +238,7 @@ const Home = () => {
                 <h1>How It Works</h1>
               </div>
               {/* Nav tabs */}
-              <ul className="nav nav-tabs" role="tablist">
-                <li className="nav-item">
-                  <a className="nav-link active" data-toggle="tab" href="#all">Buyer</a>
-                </li>
-                <li className="nav-item">
-                  <a style={{color: 'gray'}} className="nav-link" data-toggle="tab" href="#elec">Seller</a>
-                </li>
-              </ul>
+         
             </div>
           </div>
           <div className="container" style={{borderRadius: '20px'}}>

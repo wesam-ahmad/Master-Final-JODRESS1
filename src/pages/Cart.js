@@ -1,8 +1,81 @@
 import React from 'react';
+import axios from 'axios';
 import "./css/Cart.css";
 import { Link } from 'react-router-dom';
+import CartCard from './../components/cartCard';
+import { useEffect } from 'react';
+
+
+
+
 
 const Cart = () => {
+  const cart_count_storage = localStorage.getItem("cart");
+ 
+//const [product, setProduct] = useState(null);
+
+let cart_count_tmp =[];
+let cart_count = 0;
+let total_price= 0;
+let total_shipping= 3;
+let total_tax= 0;
+let tax= 0;
+
+if(cart_count_storage != null){
+  cart_count_tmp =JSON.parse(cart_count_storage);
+  cart_count = cart_count_tmp.length;
+  cart_count_tmp?.forEach(element => {
+    total_price += element.price;
+  });
+  tax = 10 /100 *total_price ;
+
+  total_tax = total_price + 10 /100 *total_price +total_shipping;
+
+}
+
+useEffect(() => {
+  // const fetchProduct = async () => {
+  //   try {
+  //     let ids='';
+  //     cart_count_tmp.forEach(element => {
+  //       ids =ids + element.id + ',';
+  //     });
+  //     const response = await axios.get(`http://localhost:8000/products/${ids}`); // Replace 1 with the actual product ID
+  //     console.log(response.data);
+      
+  //   } catch (error) {
+  //     console.error('Error fetching product:', error);
+  //   }
+  // };
+  // fetchProduct();
+/*useEffect(() => {
+function fetchProduct(id) {
+  try {
+    const response =  axios.get(`http://localhost:8000/products/${id}`); // Replace 1 with the actual product ID
+    return (response.data);
+  } catch (error) {
+    console.error('Error fetching product:', error);
+
+  }
+};
+
+function fetchProductsFromLocalStorage() {
+  const localStorageData = localStorage.getItem('cart'); // Assuming your cart data is stored as an array of IDs
+  const cartItems = JSON.parse(localStorageData) || [];
+  console.log(cartItems);
+  const productPromises = cartItems.map(id => fetchProduct(id));
+
+  // Promise.all(productPromises)
+  //   .then(products => {
+  //     // Here, 'products' is an array containing the fetched product data
+  //     console.log(products);
+  //   })
+  //   .catch(error => {
+  //     console.error('Error fetching products:', error);
+  //   });
+    
+}fetchProductsFromLocalStorage();*/
+});
     return (
         <section className="h-100 h-custom" style={{backgroundColor: '#eee'}}>
         <div className="container py-5 h-100">
@@ -17,108 +90,17 @@ const Cart = () => {
                       <div className="d-flex justify-content-between align-items-center mb-4">
                         <div>
                           <p className="mb-1">Shopping cart</p>
-                          <p className="mb-0">You have 4 items in your cart</p>
+                          <p className="mb-0">You have {cart_count} items in your cart</p>
                         </div>
-                        <div>
-                          <p className="mb-0"><span className="text-muted">Sort by:</span> <a href="#!" className="text-body">price <i className="fas fa-angle-down mt-1" /></a></p>
-                        </div>
+                      
                       </div>
-                      <div className="card mb-3">
-                        <div className="card-body">
-                          <div className="d-flex justify-content-between">
-                            <div className="d-flex flex-row align-items-center">
-                              <div>
-                                <img src="./images/image13.PNG" className="img-fluid rounded-3" alt="Shopping item" style={{width: '65px'}} />
-                              </div>
-                              <div className="ms-3">
-                                <h5>dress name</h5>
-                                <p className="small mb-0">descraption</p>
-                              </div>
-                            </div>
-                            <div className="d-flex flex-row align-items-center">
-                              <div style={{width: '50px'}}>
-                                <h5 className="fw-normal mb-0">2</h5>
-                              </div>
-                              <div style={{width: '80px'}}>
-                                <h5 className="mb-0">$900</h5>
-                              </div>
-                              <a href="#!" style={{color: '#cecece'}}><i className="fas fa-trash-alt" /></a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="card mb-3">
-                        <div className="card-body">
-                          <div className="d-flex justify-content-between">
-                            <div className="d-flex flex-row align-items-center">
-                              <div>
-                                <img src="./images/image13.PNG" className="img-fluid rounded-3" alt="Shopping item" style={{width: '65px'}} />
-                              </div>
-                              <div className="ms-3">
-                                <h5>dress name </h5>
-                                <p className="small mb-0">descraption</p>
-                              </div>
-                            </div>
-                            <div className="d-flex flex-row align-items-center">
-                              <div style={{width: '50px'}}>
-                                <h5 className="fw-normal mb-0">2</h5>
-                              </div>
-                              <div style={{width: '80px'}}>
-                                <h5 className="mb-0">$900</h5>
-                              </div>
-                              <a href="#!" style={{color: '#cecece'}}><i className="fas fa-trash-alt" /></a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="card mb-3">
-                        <div className="card-body">
-                          <div className="d-flex justify-content-between">
-                            <div className="d-flex flex-row align-items-center">
-                              <div>
-                                <img src="./images/image13.PNG" className="img-fluid rounded-3" alt="Shopping item" style={{width: '65px'}} />
-                              </div>
-                              <div className="ms-3">
-                                <h5>dress name</h5>
-                                <p className="small mb-0">descraption</p>
-                              </div>
-                            </div>
-                            <div className="d-flex flex-row align-items-center">
-                              <div style={{width: '50px'}}>
-                                <h5 className="fw-normal mb-0">1</h5>
-                              </div>
-                              <div style={{width: '80px'}}>
-                                <h5 className="mb-0">$1199</h5>
-                              </div>
-                              <a href="#!" style={{color: '#cecece'}}><i className="fas fa-trash-alt" /></a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="card mb-3 mb-lg-0">
-                        <div className="card-body">
-                          <div className="d-flex justify-content-between">
-                            <div className="d-flex flex-row align-items-center">
-                              <div>
-                                <img src="./images/image13.PNG" className="img-fluid rounded-3" alt="Shopping item" style={{width: '65px'}} />
-                              </div>
-                              <div className="ms-3">
-                                <h5>dress name</h5>
-                                <p className="small mb-0">descraption</p>
-                              </div>
-                            </div>
-                            <div className="d-flex flex-row align-items-center">
-                              <div style={{width: '50px'}}>
-                                <h5 className="fw-normal mb-0">1</h5>
-                              </div>
-                              <div style={{width: '80px'}}>
-                                <h5 className="mb-0">$1799</h5>
-                              </div>
-                              <a href="#!" style={{color: '#cecece'}}><i className="fas fa-trash-alt" /></a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+
+                      {cart_count > 0 && cart_count_tmp.map((item) => (
+  
+    <CartCard data={item} ></CartCard>
+
+  ))}
+
                     </div>
                     <div className="col-lg-5">
                       {/* <div class="card text-white rounded-3" style="background-color:#FBC5C5; ">
@@ -170,20 +152,24 @@ const Cart = () => {
                       <hr className="my-5" />
                       <div className="d-flex justify-content-between">
                         <p className="mb-2">Subtotal</p>
-                        <p className="mb-2">$4798.00</p>
+                        <p className="mb-2">${total_price} JD</p>
                       </div>
                       <div className="d-flex justify-content-between">
                         <p className="mb-2">Shipping</p>
-                        <p className="mb-2">$20.00</p>
+                        <p className="mb-2">${total_shipping} JD</p>
+                      </div>
+                      <div className="d-flex justify-content-between">
+                        <p className="mb-2">Tax</p>
+                        <p className="mb-2">${tax} JD</p>
                       </div>
                       <div className="d-flex justify-content-between mb-4">
                         <p className="mb-2">Total(Incl. taxes)</p>
-                        <p className="mb-2">$4818.00</p>
+                        <p className="mb-2">${total_tax} JD</p>
                       </div>
                       <Link to="/Checkout" >
                       <button type="button" className="btn btn-info btn-block btn-lg" style={{backgroundColor: '#F45757'}}>
                         <div className="d-flex justify-content-between">
-                          <span>$4818.00</span>
+                          <span>{total_tax} JD </span>
                           <span>Checkout <i className="fas fa-long-arrow-alt-right ms-2" /></span>
                         </div>
                       </button>

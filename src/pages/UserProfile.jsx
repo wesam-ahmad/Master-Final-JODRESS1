@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 //import bcrypt from 'bcryptjs';
 // const bcrypt = require("bcrypt");
-
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.css';
+import { Link } from "react-router-dom";
 const UserProfile = () => {
   const [User, setUser] = useState();
   const [user_name, setUser_name] = useState("");
@@ -10,7 +12,6 @@ const UserProfile = () => {
   const [user_phone, setUser_phone] = useState("");
   const [user_address, setUser_address] = useState("");
   const [user_password, setUser_password] = useState("");
-  const [current_password, setCurrent_password] = useState("");
   const [new_password, setNew_password] = useState("");
   const [confirm_password, setConfirm_password] = useState("");
   const [errors, setErrors] = useState({});
@@ -72,10 +73,20 @@ const UserProfile = () => {
         }}
         
       );
+      Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: ' Your Data Updated  successfully',
+      });
 
       console.log("Data Updated  successfully");
       getUser();
     } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'Failed to Update Your Data.',
+      });
       console.log("Error:", error.message);
     }
   };
@@ -107,7 +118,7 @@ const UserProfile = () => {
     e.preventDefault();
 
     // Validate form inputs
-    const validationErrors2 = validateForm2({ current_password, new_password, confirm_password });
+    const validationErrors2 = validateForm2({  new_password, confirm_password });
     setErrors(validationErrors2);
 
     // // If there are errors, stop the submission
@@ -116,8 +127,7 @@ const UserProfile = () => {
     }
 
     // // Create an object with the form data
-    const formData = {
-      current_password,
+    const formData = {      
       new_password
         };
     const token = localStorage.getItem("token") || "";
@@ -152,9 +162,7 @@ const UserProfile = () => {
 
     // alert(JSON.stringify(hashedPassword));
     // alert(user_password);
-    if (!values.current_password) {
-      errors.current_password = "Current Password is required";
-    }
+
     /*else if (hashedPassword !=  user_password){
       errors.current_password = "Current Password is incorrect"; 
     }*/
@@ -232,7 +240,19 @@ const UserProfile = () => {
                             {User?.user_name}
                           </h4>
                           <p className="mb-0"> {User?.user_email} </p>
+                          <div className="col-12">
+                            <Link to = "/addproudect">
+                                    <button
+                                      className="btn btn-primary"
+                                      type="submit"
+                                      style={{ backgroundColor: '#F45757' ,color:"black"}}
+                                    >
+                                      Add Dress
+                                    </button>
+                                    </Link>
+                                  </div>
                         </div>
+                        
                         <div className="text-center text-sm-end">
                           <span className="badge bg-secondary">
                             {User?.role == "serviceProvider"
@@ -418,7 +438,9 @@ const UserProfile = () => {
                                     >
                                       Save Changes
                                     </button>
+                                    
                                   </div>
+                                  
                                 </div>
                               </div>
                             </div>
@@ -444,30 +466,7 @@ const UserProfile = () => {
                                 <b>Change Password</b>
                               </div>
                          
-                              <div className="row">
-                                <div className="col">
-                                  <div className="form-group">
-                                    <label htmlFor="current_password">
-                                      Current Password
-                                    </label>
-                                    <input
-                                      className="form-control"
-                                      type="password"
-                                      id="current_password"
-                                      name="current_password"
-                                      onChange={(e) =>
-                                        setCurrent_password(e.target.value)
-                                      }
-                                      placeholder="••••••"
-                                    />
-                                    {errors.current_password && (
-                                             <p style={{ color: "red", fontSize: "13px" }}>
-                                                {errors.current_password}
-                                                        </p>
-                                                           )}
-                                  </div>
-                                </div>
-                              </div>
+             
                               <div className="row">
                                 <div className="col">
                                   <div className="form-group">

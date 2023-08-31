@@ -12,6 +12,13 @@ const Header = ({isLogin,updateIsLogin}) => {
     const navigate = useNavigate();
 
     const token = localStorage.getItem("token");
+    const cart_count_storage = localStorage.getItem("cart");
+    let cart_count_tmp =[];
+    let cart_count = 0;
+    if(cart_count_storage != null){
+      cart_count_tmp =JSON.parse(cart_count_storage);
+      cart_count = cart_count_tmp.length;
+    }
     let username = "";
     let role = "";
  
@@ -20,6 +27,7 @@ const Header = ({isLogin,updateIsLogin}) => {
           const decodedToken = jwtDecode(token);
           username = decodedToken.username;
           role = decodedToken.role;
+          
           // Use the extracted username and role variables as needed
         } catch (error) {
           console.error("Error decoding token:", error);
@@ -42,6 +50,7 @@ const Header = ({isLogin,updateIsLogin}) => {
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
         {/* MDB */}
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css" rel="stylesheet" />
+
         <title>Document</title>
       </div>
       
@@ -54,7 +63,7 @@ const Header = ({isLogin,updateIsLogin}) => {
             <div id="navbarSupportedContent">
               {/* Navbar brand */}
               <a className="navbar-brand mt-2 mt-lg-0" href="#">
-                <img src="./images/1.png" height={25} width="130px" alt="Logo" loading="lazy" />
+                <img src="http://localhost:3000/images/1.png" height={25} width="130px" alt="Logo" loading="lazy" />
               </a>
             </div>
             {/* Collapsible wrapper */}
@@ -65,7 +74,7 @@ const Header = ({isLogin,updateIsLogin}) => {
         <button className="btn btn-outline-dark" type="submit">
           <i className="bi-cart-fill me-1" />
           Cart
-          <span className="badge bg-dark text-white ms-1 rounded-pill">0</span>
+          <span className="badge bg-dark text-white ms-1 rounded-pill">{cart_count}</span>
         </button>
         </Link>
                 ): null}
@@ -74,7 +83,7 @@ const Header = ({isLogin,updateIsLogin}) => {
                 <button className="btn btn-outline-dark" type="submit">
                   <i className="bi-cart-fill me-1" />
                   Cart
-                  <span className="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                  <span className="badge bg-dark text-white ms-1 rounded-pill">{cart_count}</span>
                 </button>
                 </Link>):null}
       </form>
@@ -131,7 +140,7 @@ const Header = ({isLogin,updateIsLogin}) => {
                   <Link className="nav-link active" aria-current="page" to="/">HOME</Link>
                 </li>
                 <li className="nav-item" style={{paddingRight: '50px'}}>
-                <Link className="nav-link" to="#accordionExample">HOW IT WORK</Link>
+                <a className="nav-link" href="http://localhost:3000/#accordionExample">HOW IT WORK</a>
                 </li>
                 <li className="nav-item" style={{paddingRight: '50px'}}>
                  

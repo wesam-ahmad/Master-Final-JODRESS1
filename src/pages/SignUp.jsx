@@ -363,11 +363,7 @@ export default function Signup({ updateIsLogin }) {
                     </p>
                   </div>
                   <div className="mt-3 d-flex flex-column align-items-center">
-                    <div className="my-4 border-bottom text-center">
-                      <div className="px-2 d-inline-block text-lg text-secondary font-weight-medium bg-white translate-middle-y">
-                        Or Sign Up With
-                      </div>
-                    </div>
+                   
                     {/* <div className="w-100 mt-4">
                       <div className="d-flex flex-column align-items-center">
                         <Facebook

@@ -229,11 +229,7 @@ export default function SignIn({ updateIsLogin }) {
                   </div>
                   <div className="mt-3 d-flex flex-column align-items-center">
                     <div className="w-100 mt-2">
-                      <div className="my-4 border-bottom text-center">
-                        <div className="px-2 d-inline-block text-lg text-secondary font-weight-medium bg-white translate-middle-y">
-                          Or Sign In With
-                        </div>
-                      </div>
+                   
                       {/* <div className="d-flex flex-column align-items-center">
                         <Facebook
                           massage={"Sign in with Facebook"}
